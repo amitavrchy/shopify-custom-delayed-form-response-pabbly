@@ -1,0 +1,195 @@
+<div style="padding: 30px; max-width: 800px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+  <form id="customer-query" style="display: flex; flex-direction: column; gap: 20px;">
+    <div>
+      <div style="display: flex; flex-direction: column;" class="initQuery">
+        <label for="order-choice" style="font-size: 16px; font-weight: bold; color: #333;">Choose One</label>
+        <select
+          id="order-choice"
+          style="padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; width:100%;"
+        >
+          <option value="...">...</option>
+          <option value="placedOrder">I placed an order already.</option>
+          <option value="placeOrder">I am interested in placing an order.</option>
+          <option value="ambassador">Brand Ambassador..?</option>
+          <option value="otherQuery">Ask a different question.</option>
+        </select>
+      </div>
+    </div>
+
+    <div style="display: none;" class="placedOrder">
+      <label for="order-inquiry" style="font-size: 16px; font-weight: bold; color: #333;">Order Inquiry</label>
+      <select
+        name="question1"
+        id="order-inquiry"
+        style="padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; width:100%;"
+      >
+        <option value="">...</option>
+        <option value="Where is my order/When will it ship?">Where is my order/When will it ship?</option>
+        <option value="I need to update my shipping address!">I need to update my shipping address!</option>
+        <option value="I ordered the wrong size, I need to change it?">
+          I ordered the wrong size, I need to change it?
+        </option>
+        <option value="My order shows it shipped but tracking hasn’t updated, why?">
+          My order shows it shipped but tracking hasn’t updated, why?
+        </option>
+        <option value="I received my order and something is wrong.">I received my order and something is wrong.</option>
+        <option value="I would like to exchange.">I would like to exchange.</option>
+        <option value="I want a refund.">I want a refund.</option>
+        <option value="I want to cancel my order.">I want to cancel my order.</option>
+        <option value="My tracking shows delivered but I haven’t received it.">
+          My tracking shows delivered but I haven’t received it.
+        </option>
+        <option value="My tracking shows return to sender, but my address was right.">
+          My tracking shows return to sender, but my address was right.
+        </option>
+      </select>
+    </div>
+
+    <div style="display: none;" class="placeOrder">
+      <label for="pre-sale-question" style="font-size: 16px; font-weight: bold; color: #333;"
+        >My question is? (Pre-Sale)</label
+      >
+      <select
+        name="question2"
+        id="pre-sale-question"
+        style="padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; width:100%;"
+      >
+        <option value="">...</option>
+        <option value="When do you restock sold-out styles?">When do you restock sold-out styles?</option>
+        <option value="How long does shipping take?">How long does shipping take?</option>
+        <option value="What’s your policy on exchanges, refunds, or cancellations?">
+          What’s your policy on exchanges, refunds, or cancellations?
+        </option>
+        <option value="Can I get a discount?">Can I get a discount?</option>
+        <option value="Size chart? How do your items fit?">Size chart? How do your items fit?</option>
+      </select>
+    </div>
+
+    <div style="display: none;" class="ambassador">
+      <label for="brand-ambassador-question" style="font-size: 16px; font-weight: bold; color: #333;"
+        >My question is? (Brand-Ambassador)</label
+      >
+      <select
+        name="question3"
+        id="brand-ambassador-question"
+        style="padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; width:100%;"
+      >
+        <option value="">...</option>
+        <option value="How do I become a brand ambassador?">How do I become a brand ambassador?</option>
+        <option value="When will I get paid?">When will I get paid?</option>
+        <option value="Do I get free clothes?">Do I get free clothes?</option>
+        <option value="All of the above.">All of the above.</option>
+      </select>
+    </div>
+
+    <div style="display: flex; flex-direction: column;" class="universalQuery">
+      <label for="first-name" style="font-size: 16px; font-weight: bold; color: #333;">Your Name:</label>
+      <input
+        type="text"
+        id="first-name"
+        name="name"
+        style="padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;"
+      >
+    </div>
+
+    <div style="display: flex; flex-direction: column;" class="universalQuery">
+      <label for="email" style="font-size: 16px; font-weight: bold; color: #333;">Your Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        style="padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;"
+      >
+    </div>
+
+    <div style="display: none;" class="otherQuery">
+      <label for="customer-question" style="font-size: 16px; font-weight: bold; color: #333;">Your Question?</label>
+      <textarea
+        name="otherQuery"
+        id="customer-question"
+        style="padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;"
+      ></textarea>
+    </div>
+
+    <div style="text-align: center;" class="universalQuery">
+      <button
+        name="submit"
+        type="submit"
+        style="background-color: #007BFF; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.getElementById('order-choice').addEventListener('change', function () {
+    let selectedClass = this.value;
+    document.querySelectorAll('.placedOrder, .placeOrder, .ambassador, .otherQuery').forEach((div) => {
+      div.style.display = 'none';
+    });
+
+    if (selectedClass) {
+      document.querySelectorAll('.' + selectedClass).forEach((div) => {
+        div.style.display = 'flex';
+        div.style.flexDirection = 'column';
+      });
+    }
+  });
+  document.getElementById('customer-query').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    let formValues = {};
+
+    // Convert FormData to a JavaScript object
+    formData.forEach((value, key) => {
+      formValues[key] = value.trim(); // Trim to remove any accidental spaces
+    });
+
+    // Extract name and email
+    const email = formValues['email'] || '';
+    const name = formValues['name'] || '';
+
+    // Get the first non-empty question value
+    const questionKeys = ['question1', 'question2', 'question3'];
+    let question = '';
+    for (let key of questionKeys) {
+      if (formValues[key] && formValues[key] !== '') {
+        question = formValues[key];
+        break; // Stop at the first non-empty value
+      }
+    }
+
+    // Debugging: Log to console before sending
+    console.log({ email, name, question });
+
+    // Send data to Pabbly Webhook
+    const webhookURL = `https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjYwNTY5MDYzNDA0MzY1MjZlNTUzMzUxM2Ii_pc?email=${email}&name=${name}&question=${question}`;
+
+    try {
+      const response = await fetch(webhookURL, {
+        method: 'GET',
+      });
+      if (response.ok) {
+        alert('Your query is submitted');
+      }
+      const result = await response.json();
+      console.log('Webhook Response:', result);
+    } catch (error) {
+      console.error('Error sending data:', error);
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Star Rating",
+  "target": "section",
+  "settings": [
+    { "type": "product", "id": "product", "label": "product", "autofill": true },
+    { "type": "color", "id": "colour", "label": "Star Colour", "default": "#ff0000" }
+  ]
+}
+{% endschema %}
